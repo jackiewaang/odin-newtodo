@@ -1,4 +1,5 @@
 import {projectItem, todoItem} from "./todoFunctions.js";
+import { insideProject } from "./insideProject.js";
 
 export const home = (projects, content) => {
 
@@ -6,8 +7,8 @@ export const home = (projects, content) => {
         if(project.title != ''){
             const projectElem = document.createElement('div');
             projectElem.innerHTML = `
-            <div id='left'>
-                <p class='text-lg font-normal'>${project.title}</P>
+            <div id='projectDiv'>
+                <p class='text-lg font-normal cursor-pointer projectItem'>${project.title}</P>
             </div>
             <div id='right' class='flex gap-3'>
                 <button class=>Edit</button>
@@ -16,6 +17,11 @@ export const home = (projects, content) => {
             `
             projectElem.classList.add('flex', 'p-3', 'justify-between' );
             content.appendChild(projectElem);
+            const projectPara = projectElem.firstElementChild.firstElementChild; // p 
+            projectPara.addEventListener('click', () => {
+                insideProject(project);
+            })
+            
         }
     })
 
@@ -49,3 +55,5 @@ export const home = (projects, content) => {
         home(projects, content);
     })
 }
+
+//create hashmap to find project item from projects 

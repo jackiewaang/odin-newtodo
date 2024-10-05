@@ -14,6 +14,6 @@ const dialog = (() => {
     function update(){
         initialLoader.content.textContent = '';
     }
-
+    
 })()
 
