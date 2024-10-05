@@ -59,7 +59,7 @@
             </button>                  
         </section>
     </nav>
-    <main class="flex flex-col justify-start p-14 mt-3"></main>
+    <main class="flex flex-col justify-start p-14 mt-3 gap-5"></main>
     <dialog id="projectModal">
         <form class="grid grid-col-2 grid-rows-3 p-5 gap-2 text-xl justify-center items-center text-center rounded-lg shadow-lg">
             <label class="col-start-1 col-end-3 font-semibold text-2xl">Add a new Project</label>
@@ -98,18 +98,21 @@
         </form>
     </dialog>
     <dialog id="todoHome" class="rounded-lg">
-        <div class="p-5 grid w-[900px] grid-rows-[1fr_1fr_1fr_auto] gap-5">
-            <input class="text-2xl outline-0 row-start-1 row-span-1 font-semibold" type="text" id="tTitle" value="Title">
-            <input class="outline-0 row-start-2 row-span-1" type="text" id="tDate"  value="date">
-            <div class="row-start-3 row-span-1 flex gap-3 items-center">
+        <svg id='closeInterface' class='p-3 w-12 h-12 cursor-pointer' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>          
+        <div class="items-center p-10 pt-5 grid w-[900px] grid-rows-[1fr_1fr_1fr_auto] gap-5">
+            <input class="text-2xl outline-0 row-start-1 row-span-1 font-semibold" type="text" id="tTitle">
+            <input class="outline-0 row-start-2 row-span-1" type="text" id="tDate" >
+            <div class="row-start-3 row-span-1 flex gap-5 items-center">
                 <label class="row-start-3 row-span-1">Priority</label>
-                <select class="outline-0">
+                <select id='tPriority' class="outline-0">
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
             </div>
-            <textarea class="outline-0 row-start-4 row-span-1 w-full h-[200px]" type="text" id="tDesc"  value="Description">Description</textarea>
+            <textarea class="outline-0 row-start-4 row-span-1 w-full h-[200px] resize-none" type="text" id="tDesc"  value="Description"></textarea>
         </div>
     </dialog>
     <footer class="box-border shadow-lg z-10 font-semibold flex justify-center items-center">Copyright © jackiewaang</footer>

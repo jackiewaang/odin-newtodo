@@ -34,23 +34,25 @@ export const insideProject = (project) => {
     const createTodoBtn = document.querySelector('#createTodo');
     createTodoBtn.addEventListener('click', () => {
         const title = document.querySelector('#todoTitle');
-        const description = document.querySelector('#todoDescription');
-        const duedate = document.querySelector('#todoDueDate');
-        const priority = document.querySelector('#todoPriority');
-        project.todos.push(todoItem(title.value, description.value, duedate.value, priority.value));
-        title.value = '';
-        description.value = '';
-        duedate.value = '';
-        priority.value = 'High';
-        todoModal.close();
-        showNew(project.todos.at(-1), content);
+        if(title.value.trim() !== ""){
+            const description = document.querySelector('#todoDescription');
+            const duedate = document.querySelector('#todoDueDate');
+            const priority = document.querySelector('#todoPriority');
+            project.todos.push(todoItem(title.value, description.value, duedate.value, priority.value));
+            title.value = '';
+            description.value = '';
+            duedate.value = '';
+            priority.value = 'High';
+            todoModal.close();
+            showNew(project.todos.at(-1), content);
+        }
     })
 
     function showNew(todo, content){
         const todoElem = document.createElement('div');
         todoElem.innerHTML = `
-            <span class='text-2xl row-start-1 row-end-2'>${todo.title}</span>
-            <span class=''>${todo.dueDate}</span>
+            <span id='itemTitle' class='text-2xl row-start-1 row-end-2'>${todo.title}</span>
+            <span id='itemDate'>${todo.dueDate}</span>
             <div class='ml-auto flex row-start-1 row-end-3 gap-3'>
                 <svg id='editBtn' class='w-10 h-10' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
@@ -84,6 +86,11 @@ export const insideProject = (project) => {
         })
 
         // edit todo button
+        const editBtn = todoElem.querySelector('#editBtn');
+        editBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            openEditTodoModal(todo, todoElem);
+        })
     }
 
     function changeColor(priority){
@@ -96,5 +103,38 @@ export const insideProject = (project) => {
             color = 'bg-lime-200';
         }
         return color;
+    }
+
+    function openEditTodoModal(todo, todoElem){
+        const editModal = document.querySelector('#todoHome');
+        editModal.showModal();
+
+        const newTitle = document.querySelector('#tTitle');
+        newTitle.value = todo.title;
+
+        const newDate = document.querySelector('#tDate');
+        newDate.value = todo.dueDate;
+
+        const newPriority = document.querySelector('#tPriority');
+        newPriority.value = todo.priority;
+
+        const newDesc = document.querySelector('#tDesc');
+        newDesc.textContent = todo.description;
+
+        const closeBtn = document.querySelector('#closeInterface');
+        closeBtn.addEventListener('click', () => {
+            if(newTitle){
+                todo.title = newTitle.value.trim();
+                todo.dueDate = newDate.value.trim();
+                const prev = todo.priority;
+                todo.priority = newPriority.value;
+                todo.description = newDesc.value.trim();
+                document.querySelector('#itemTitle').textContent = newTitle.value.trim();
+                document.querySelector('#itemDate').textContent = newDate.value.trim();
+                todoElem.classList.remove(changeColor(prev));
+                todoElem.classList.add(changeColor(todo.priority));
+            }
+            editModal.close();
+        }, {once:true});
     }
 }

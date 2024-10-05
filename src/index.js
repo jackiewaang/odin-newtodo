@@ -6,7 +6,6 @@ const initialLoader = (() => {
     const content = document.querySelector('main');
     const projects = [projectItem('Main Project')];
     home(projects, content);
-    document.querySelector('#todoHome').showModal();
     return {content, projects};
 })()
 
