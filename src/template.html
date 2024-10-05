@@ -97,6 +97,21 @@
             <button type="button" id="createTodo" class="col-start-2 col-end-3 bg-green-400 hover:bg-green-500 rounded-lg p-3 font-semibold">Create</button>
         </form>
     </dialog>
+    <dialog id="todoHome" class="rounded-lg">
+        <div class="p-5 grid w-[900px] grid-rows-[1fr_1fr_1fr_auto] gap-5">
+            <input class="text-2xl outline-0 row-start-1 row-span-1 font-semibold" type="text" id="tTitle" value="Title">
+            <input class="outline-0 row-start-2 row-span-1" type="text" id="tDate"  value="date">
+            <div class="row-start-3 row-span-1 flex gap-3 items-center">
+                <label class="row-start-3 row-span-1">Priority</label>
+                <select class="outline-0">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <textarea class="outline-0 row-start-4 row-span-1 w-full h-[200px]" type="text" id="tDesc"  value="Description">Description</textarea>
+        </div>
+    </dialog>
     <footer class="box-border shadow-lg z-10 font-semibold flex justify-center items-center">Copyright © jackiewaang</footer>
 </body>
 </html>
