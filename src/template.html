@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todolist</title>
+</head>
+<body class="grid grid-rows-[0.6fr_5fr_0.5fr] min-h-screen">
+    <header class="box-border bg-gray-50 shadow-lg z-10 text-3xl py-3 px-3 font-semibold flex justify-center items-center">TodoList</header>
+    <main class="flex flex-col justify-start"></main>
+    <dialog id="projectModal">
+        <form class="grid grid-col-2 grid-rows-4 p-5 gap-2 text-xl justify-center items-center text-center rounded-lg shadow-lg">
+            <label class="col-start-1 col-end-3 font-semibold text-2xl">Add a new Project</label>
+            <label for="projectTitle" class="col-start-1 col-end-2 font-semibold">Title:</label>
+            <input type="text" id="projectTitle" name="title" class="text-center col-start-2 col-end-3 rounded-lg border-solid border-black border-2" required>
+            <button id="closeProjectModal" class="col-start-1 col-end-2 bg-red-400 hover:bg-red-500 rounded-lg p-3 font-semibold">Cancel</button>
+            <button type="button" id="createProject" class="col-start-2 col-end-3 bg-green-400 hover:bg-green-500 rounded-lg p-3 font-semibold">Submit</button>
+        </form>
+    </dialog>
+    <footer class="box-border shadow-lg z-10 font-semibold flex justify-center items-center">Copyright © jackiewaang</footer>
+</body>
+</html>
