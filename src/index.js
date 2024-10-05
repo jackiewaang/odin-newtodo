@@ -9,11 +9,18 @@ const initialLoader = (() => {
     return {content, projects};
 })()
 
-const dialog = (() => {
+const sidebarPages = (() => {
 
     function update(){
         initialLoader.content.textContent = '';
     }
-    
+
+    const projectsBtn = document.querySelector('#projectsBtn');
+    projectsBtn.addEventListener('click', () => {
+        update();
+        home(initialLoader.projects, initialLoader.content);
+        console.log(initialLoader.projects);
+    })
+
 })()
 
