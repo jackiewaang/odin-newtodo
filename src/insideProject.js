@@ -1,4 +1,5 @@
 import { todoItem } from "./todoFunctions";
+import { format } from "date-fns";
 
 export const insideProject = (project) => {
     const content = document.querySelector('main');
@@ -37,8 +38,10 @@ export const insideProject = (project) => {
         if(title.value.trim() !== ""){
             const description = document.querySelector('#todoDescription');
             const duedate = document.querySelector('#todoDueDate');
+            const [year, month, day] = duedate.value.split('/');
+            const date = format(new Date(+year, +month, +day), 'yyyy/MM/dd');
             const priority = document.querySelector('#todoPriority');
-            project.todos.push(todoItem(title.value, description.value, duedate.value, priority.value));
+            project.todos.push(todoItem(title.value, description.value, date, priority.value));
             title.value = '';
             description.value = '';
             duedate.value = '';
@@ -125,12 +128,13 @@ export const insideProject = (project) => {
         closeBtn.addEventListener('click', () => {
             if(newTitle){
                 todo.title = newTitle.value.trim();
-                todo.dueDate = newDate.value.trim();
+                const [year, month, day] = newDate.value.trim().split('/');
+                todo.dueDate = format(new Date(year, month, day), 'yyyy/MM/dd');
                 const prev = todo.priority;
                 todo.priority = newPriority.value;
                 todo.description = newDesc.value.trim();
                 document.querySelector('#itemTitle').textContent = newTitle.value.trim();
-                document.querySelector('#itemDate').textContent = newDate.value.trim();
+                document.querySelector('#itemDate').textContent = todo.dueDate;
                 todoElem.classList.remove(changeColor(prev));
                 todoElem.classList.add(changeColor(todo.priority));
             }
