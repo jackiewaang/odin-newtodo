@@ -1,7 +1,7 @@
 import { todoItem } from "./todoFunctions";
 import { format } from "date-fns";
 
-export const insideProject = (project) => {
+export const insideProject = (project, projects) => {
     const content = document.querySelector('main');
     content.textContent = '';
     const container = document.createElement('div');
@@ -42,6 +42,7 @@ export const insideProject = (project) => {
             const date = format(new Date(+year, +month, +day), 'yyyy/MM/dd');
             const priority = document.querySelector('#todoPriority');
             project.todos.push(todoItem(title.value, description.value, date, priority.value));
+            localStorage.setItem('projects', JSON.stringify(projects));
             title.value = '';
             description.value = '';
             duedate.value = '';
@@ -84,7 +85,11 @@ export const insideProject = (project) => {
         const deleteBtn = todoElem.querySelector('#deleteBtn');
         deleteBtn.addEventListener('click', (event) => {
             event.stopPropagation();
-            project.remove(todo);
+            const index = project.todos.findIndex(t => t.title === todo.title);
+            if(index >= 0){
+                project.todos.splice(index, 1);
+            }
+            localStorage.setItem('projects', JSON.stringify(projects));
             content.removeChild(todoElem);
         })
 
@@ -137,6 +142,7 @@ export const insideProject = (project) => {
                 document.querySelector('#itemDate').textContent = todo.dueDate;
                 todoElem.classList.remove(changeColor(prev));
                 todoElem.classList.add(changeColor(todo.priority));
+                localStorage.setItem('projects', JSON.stringify(projects));
             }
             editModal.close();
         }, {once:true});

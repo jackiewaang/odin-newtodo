@@ -36,6 +36,7 @@ export const home = (projects, content) => {
         const title = document.querySelector('#projectTitle').value;
         if(title.trim() !== ""){
             projects.push(projectItem(title));
+            localStorage.setItem('projects', JSON.stringify(projects));
             document.querySelector('#projectTitle').value = '';
             projectModal.close();
             showNewProject(projects.at(-1), content);
@@ -58,7 +59,7 @@ export const home = (projects, content) => {
         // click title of project
         const projectPara = projectElem.firstElementChild.firstElementChild; // p 
         projectPara.addEventListener('click', () => {
-            insideProject(project);
+            insideProject(project, projects);
         })
 
         // handle edit button
@@ -72,6 +73,7 @@ export const home = (projects, content) => {
         removeBtn.addEventListener('click', () => {
             const index = projects.indexOf(project);
             projects.splice(index, 1);
+            localStorage.setItem('projects', JSON.stringify(projects));
             content.removeChild(projectElem);
         })
     }
@@ -94,6 +96,7 @@ export const home = (projects, content) => {
             if(newTitle){
                 project.title = newTitle;
                 projectPara.textContent = newTitle;
+                localStorage.setItem('projects', JSON.stringify(projects));
             }
             editModal.close();
         }, {once:true});
